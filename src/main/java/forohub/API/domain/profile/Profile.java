@@ -1,6 +1,8 @@
 package forohub.API.domain.profile;
 
 import forohub.API.domain.course.Course;
+import forohub.API.domain.profile.DTOS.DtoUpdateProfile;
+import forohub.API.domain.topic.DTOS.DtoUpdateTopic;
 import forohub.API.domain.topic.Topic;
 import forohub.API.domain.user.User;
 import jakarta.persistence.*;
@@ -23,11 +25,25 @@ public class Profile {
     private Long id;
     private String name;
     private String email;
+    private Boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
     private User user;
 
-    @OneToMany
+    @OneToMany(mappedBy = "profile",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Topic> topicList;
+
+    public void updateData(DtoUpdateProfile dtoUpdateProfile) {
+        if (dtoUpdateProfile.name() != null) {
+            this.name = dtoUpdateProfile.name();
+        }
+        if (dtoUpdateProfile.email() != null) {
+            this.email = dtoUpdateProfile.email();
+        }
+    }
+
+    public void deactivateProfile() {
+        this.active = false;
+    }
 }

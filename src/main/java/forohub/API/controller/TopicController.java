@@ -34,7 +34,7 @@ public class TopicController {
     private CreateTopicService createTopicService;
 
     @GetMapping
-    @Operation(summary = "Obtiene todos los topics paginados")
+    @Operation(summary = "Obtiene todos los topics")
     public ResponseEntity<Page<DtoTopicList>> listTopics(@PageableDefault(size = 5) Pageable pagination)  {
         return ResponseEntity.ok(topicRepository.findByActiveTrue(pagination).map(DtoTopicList::new));
     }

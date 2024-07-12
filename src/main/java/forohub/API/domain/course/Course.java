@@ -23,6 +23,6 @@ public class Course {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @OneToMany
+    @OneToMany(mappedBy = "course",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Topic> topicList;
 }
