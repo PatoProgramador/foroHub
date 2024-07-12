@@ -1,0 +1,18 @@
+spring:
+  profile.active: prod
+  datasource:
+    url: jdbc:mysql://${DB_HOST}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+server:
+  error:
+    include-stacktrace: never
+api:
+  security:
+    secret: ${SEC_SECRET}
