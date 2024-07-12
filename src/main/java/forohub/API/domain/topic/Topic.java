@@ -1,5 +1,6 @@
 package forohub.API.domain.topic;
 
+import forohub.API.domain.answer.Answer;
 import forohub.API.domain.course.Course;
 import forohub.API.domain.profile.Profile;
 import forohub.API.domain.topic.DTOS.DtoUpdateTopic;
@@ -10,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Table(name = "topics")
 @Entity(name = "Topic")
@@ -26,6 +28,9 @@ public class Topic {
     private LocalDateTime creation_date;
     private Boolean status;
     private Boolean active;
+
+    @OneToMany(mappedBy = "topic")
+    private List<Answer> answerList;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_autor")

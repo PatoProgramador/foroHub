@@ -1,5 +1,6 @@
 package forohub.API.domain.profile;
 
+import forohub.API.domain.answer.Answer;
 import forohub.API.domain.course.Course;
 import forohub.API.domain.profile.DTOS.DtoUpdateProfile;
 import forohub.API.domain.topic.DTOS.DtoUpdateTopic;
@@ -31,8 +32,11 @@ public class Profile {
     @JoinColumn(name = "id_user")
     private User user;
 
-    @OneToMany(mappedBy = "profile",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "profile",  cascade = CascadeType.ALL)
     private List<Topic> topicList;
+
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+    private List<Answer> answerList;
 
     public void updateData(DtoUpdateProfile dtoUpdateProfile) {
         if (dtoUpdateProfile.name() != null) {

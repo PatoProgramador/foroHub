@@ -48,7 +48,7 @@ public class ProfileController {
     @PostMapping
     @Operation(summary = "Registra un usuario en la base de datos")
     public ResponseEntity<DtoListProfile> createProfile(@RequestBody @Valid DtoRegisterProfile dtoRegisterProfile, UriComponentsBuilder uriComponentsBuilder) {
-        Profile profile = new Profile(null, dtoRegisterProfile.name(), dtoRegisterProfile.email(), null, null, null);
+        Profile profile = new Profile(null, dtoRegisterProfile.name(), dtoRegisterProfile.email(), true, null, null, null);
         profileRepository.save(profile);
         DtoListProfile dtoListProfile = conversorToDTO(profile);
 

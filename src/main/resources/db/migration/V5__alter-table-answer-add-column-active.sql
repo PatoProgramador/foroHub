@@ -1,0 +1,1 @@
+ALTER TABLE answers ADD COLUMN active tinyint default 1;
