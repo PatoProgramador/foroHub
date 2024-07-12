@@ -1,5 +1,6 @@
 package forohub.API.domain.answer;
 
+import forohub.API.domain.answer.DTOS.DtoUpdateAnswer;
 import forohub.API.domain.profile.Profile;
 import forohub.API.domain.topic.Topic;
 import jakarta.persistence.*;
@@ -32,4 +33,17 @@ public class Answer {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_topic")
     private Topic topic;
+
+    public void updateAnsw(DtoUpdateAnswer dtoUpdateAnswer) {
+        if (dtoUpdateAnswer.solution()) {
+            this.solution = dtoUpdateAnswer.solution();
+        }
+        if (dtoUpdateAnswer.message() != null) {
+            this.message = dtoUpdateAnswer.message();
+        }
+    }
+
+    public void deactivate() {
+        this.active = false;
+    }
 }
