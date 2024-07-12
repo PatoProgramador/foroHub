@@ -3,8 +3,10 @@ package forohub.API.controller;
 import forohub.API.domain.topic.CreateTopicService;
 import forohub.API.domain.topic.DTOS.DtoRegisterTopic;
 import forohub.API.domain.topic.DTOS.DtoTopicList;
+import forohub.API.domain.topic.DTOS.DtoUpdateTopic;
 import forohub.API.domain.topic.Topic;
 import forohub.API.domain.topic.TopicRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -44,5 +46,13 @@ public class TopicController {
 
         URI url = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(result.id()).toUri();
         return  ResponseEntity.created(url).body(result);
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity<DtoTopicList> updateTopic(@RequestBody @Valid DtoUpdateTopic dtoUpdateTopic) {
+        Topic topic = topicRepository.getReferenceById(dtoUpdateTopic.id());
+        topic.updateData(dtoUpdateTopic);
+        return ResponseEntity.ok(new DtoTopicList(topic));
     }
 }

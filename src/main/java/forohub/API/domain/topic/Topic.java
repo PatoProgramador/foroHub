@@ -2,6 +2,7 @@ package forohub.API.domain.topic;
 
 import forohub.API.domain.course.Course;
 import forohub.API.domain.profile.Profile;
+import forohub.API.domain.topic.DTOS.DtoUpdateTopic;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -32,4 +33,16 @@ public class Topic {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_course")
     private Course course;
+
+    public void updateData(DtoUpdateTopic dtoUpdateTopic) {
+        if (dtoUpdateTopic.status() != null) {
+            this.status = dtoUpdateTopic.status();
+        }
+        if (dtoUpdateTopic.title() != null) {
+            this.title = dtoUpdateTopic.title();
+        }
+        if (dtoUpdateTopic.message() != null) {
+            this.message = dtoUpdateTopic.message();
+        }
+    }
 }
