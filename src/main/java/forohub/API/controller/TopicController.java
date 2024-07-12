@@ -30,7 +30,7 @@ public class TopicController {
 
     @GetMapping
     public ResponseEntity<Page<DtoTopicList>> listTopics(@PageableDefault(size = 5) Pageable pagination)  {
-        return ResponseEntity.ok(topicRepository.findAll(pagination).map(DtoTopicList::new));
+        return ResponseEntity.ok(topicRepository.findByActiveTrue(pagination).map(DtoTopicList::new));
     }
 
     @GetMapping("/{id}")
