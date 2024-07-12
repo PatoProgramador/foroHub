@@ -28,12 +28,12 @@ public class ErrorsHandler {
 
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity errorHandlerValidacionsDeNegocio(Exception e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
+        return ResponseEntity.badRequest().body(new ErrorMessageDTO(e.getMessage()));
     }
 
     @ExceptionHandler(IntegrityValidation.class)
     public ResponseEntity errorHandlerValidacionesDeIntegridad(Exception e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
+        return ResponseEntity.badRequest().body(new ErrorMessageDTO(e.getMessage()));
     }
 
     private record ErrorValidationDTO(String field, String error) {
@@ -41,4 +41,6 @@ public class ErrorsHandler {
             this(error.getField(), error.getDefaultMessage());
         }
     }
+
+    private record ErrorMessageDTO(String errorMessage) { }
 }
