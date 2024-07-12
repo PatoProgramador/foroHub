@@ -25,6 +25,7 @@ public class Topic {
     private String message;
     private LocalDateTime creation_date;
     private Boolean status;
+    private Boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_autor")
@@ -44,5 +45,9 @@ public class Topic {
         if (dtoUpdateTopic.message() != null) {
             this.message = dtoUpdateTopic.message();
         }
+    }
+
+    public void deactivateTopic() {
+        this.active = false;
     }
 }

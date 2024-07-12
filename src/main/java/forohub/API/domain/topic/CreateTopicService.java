@@ -33,7 +33,7 @@ public class CreateTopicService {
         Course course = courseRepository.findById(dtoRegisterTopic.idCourse()).get();
         // instance of topic
         LocalDateTime creationDate = LocalDateTime.now();
-        Topic topic = new Topic(null, dtoRegisterTopic.title(), dtoRegisterTopic.message(), creationDate, false, profile, course);
+        Topic topic = new Topic(null, dtoRegisterTopic.title(), dtoRegisterTopic.message(), creationDate, false, true, profile, course);
         topicRepository.save(topic);
 
         return new DtoTopicList(topic);

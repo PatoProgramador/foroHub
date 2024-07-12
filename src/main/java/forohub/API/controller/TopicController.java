@@ -55,4 +55,12 @@ public class TopicController {
         topic.updateData(dtoUpdateTopic);
         return ResponseEntity.ok(new DtoTopicList(topic));
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> deleteTopic(@PathVariable Long id) {
+        Topic topic = topicRepository.getReferenceById(id);
+        topic.deactivateTopic();
+        return ResponseEntity.noContent().build();
+    }
 }
